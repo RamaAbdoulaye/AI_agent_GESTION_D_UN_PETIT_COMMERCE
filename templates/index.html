@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Produits en Stock</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <h1>Nos Produits</h1>
+
+    {% if message %}
+    <p style="color: green;"><strong>{{ message }}</strong></p>
+    {% endif %}
+
+    <ul>
+        {% for produit in produits %}
+        <li>
+            <strong>{{ produit.nom }}</strong> - {{ produit.prix }} $ (Stock: {{ produit.quantite_stock }})
+            <form method="post" action="/retirer" style="margin-top: 5px;">
+                <input type="hidden" name="produit_id" value="{{ produit.id }}">
+                <input type="number" name="quantite" min="1" placeholder="Quantité à retirer" required>
+                <button type="submit">Retirer du stock</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>
